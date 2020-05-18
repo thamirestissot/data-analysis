@@ -1,0 +1,12 @@
+application:
+  directory:
+    input: ${user.home}/data/in
+    output: ${user.home}/data/out
+
+  filename:
+    toprocess: .dat
+    processed: .done.dat
+
+  job:
+    scheduler:
+      interval: 5000

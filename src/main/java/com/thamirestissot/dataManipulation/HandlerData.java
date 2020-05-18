@@ -1,15 +1,23 @@
 package com.thamirestissot.dataManipulation;
 
 import com.thamirestissot.model.*;
-import com.thamirestissot.model.Report;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static com.thamirestissot.model.DataType.*;
 
+@Service
 public class HandlerData {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HandlerData.class);
 
     public Object processLine(String line) {
         String separator = String.valueOf(line.charAt(3));
@@ -41,5 +49,15 @@ public class HandlerData {
         Arrays.stream(fileLines).forEach(line -> data.add(processLine(line)));
 
         return new Report(data);
+    }
+
+    public String extractFileContent(Path path) {
+
+        try {
+            return Files.readAllLines(path).toString();
+        } catch (IOException e) {
+            LOGGER.error(e.getMessage());
+            return "";
+        }
     }
 }
