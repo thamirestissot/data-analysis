@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Report {
-    private int numberOfCustomers, numberOfSalesmen, mostExpensiveSaleId;
+    private int numberOfCustomers;
+    private int numberOfSalesmen;
+    private int mostExpensiveSaleId;
     private Salesman worstSalesmanEver;
 
     public Report(int numberOfCustomers, int numberOfSalesmen, int mostExpensiveSaleId, Salesman worstSalesmanEver) {
