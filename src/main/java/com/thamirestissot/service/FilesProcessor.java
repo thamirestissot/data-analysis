@@ -28,7 +28,7 @@ public class FilesProcessor {
     @Autowired
     private FilesStoreService filesStoreService;
 
-    @Scheduled(fixedRateString = "${application.job.scheduler.interval}")
+    @Scheduled(initialDelayString = "${application.job.scheduler.delay}", fixedRateString = "${application.job.scheduler.interval}")
     public void processDirectoryFiles() {
         try {
             if (filesStoreService.checkExistDirectories()) {
