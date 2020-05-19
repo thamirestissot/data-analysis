@@ -1,6 +1,7 @@
 package com.thamirestissot.model;
 
 public class Item {
+
     private int id;
     private double price;
 

@@ -1,6 +1,7 @@
 package com.thamirestissot.model;
 
 public class Salesman implements Comparable<Salesman> {
+
     private final int code = 1;
     private String cpf, name;
     private double salary;
@@ -35,12 +36,13 @@ public class Salesman implements Comparable<Salesman> {
 
     @Override
     public int compareTo(Salesman salesman) {
-        if (this.getTotalSales() < salesman.getTotalSales()) {
+
+        if (this.getTotalSales() < salesman.getTotalSales())
             return -1;
-        }
-        if (this.getTotalSales() > salesman.getTotalSales()) {
+
+        if (this.getTotalSales() > salesman.getTotalSales())
             return 1;
-        }
+
         return 0;
     }
 }

@@ -1,10 +1,12 @@
-package com.thamirestissot.model;
+package com.thamirestissot.enumerator;
 
-public enum DataType {
+public enum DataTypeEnum {
+
     SALESMAN(1), CUSTOMER(2), SALE(3);
+
     private int code;
 
-    DataType(int code) {
+    DataTypeEnum(int code) {
         this.code = code;
     }
 

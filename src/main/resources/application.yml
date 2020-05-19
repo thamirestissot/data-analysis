@@ -1,13 +1,19 @@
-application:
-  directory:
-    input: ${user.home}/data/in
-    output: ${user.home}/data/out
-
-  filename:
-    toprocess: .dat
-    processed: .done.dat
-
+app:
   job:
     scheduler:
-      delay: 5000
-      interval: 5000
+      delay: 2000
+      interval: 2000
+
+  files:
+    directory:
+      in: ${user.home}/data/in
+      out: ${user.home}/data/out
+
+  filename:
+    readonly: .dat
+    done: .done.dat
+
+logging:
+  level:
+    com:
+      thamirestissot: DEBUG

@@ -6,13 +6,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.thamirestissot.model.DataType.*;
+import static com.thamirestissot.enumerator.DataTypeEnum.*;
 
 @Service
 public class HandlerData {
@@ -52,12 +55,15 @@ public class HandlerData {
     }
 
     public String extractFileContent(Path path) {
+        Charset encoding = StandardCharsets.UTF_8;
+        byte[] encoded = new byte[0];
 
         try {
-            return Files.readAllLines(path).toString();
+            encoded = Files.readAllBytes(path);
+
         } catch (IOException e) {
-            LOGGER.error(e.getMessage());
-            return "";
+            LOGGER.info(e.getMessage());
         }
+        return encoding.decode(ByteBuffer.wrap(encoded)).toString();
     }
 }

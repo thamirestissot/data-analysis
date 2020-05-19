@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,7 +20,7 @@ public class FilesStoreService {
     private List<String> filesDone = new ArrayList<>();
 
     @Autowired
-    private ApplicationFiles applicationFiles;
+    private HandlerFile handlerFile;
 
     public void store(Path path) {
         filesDone.add(path.getFileName().toString());
@@ -30,18 +31,32 @@ public class FilesStoreService {
     }
 
     public boolean checkExistDirectories() {
-        Path pathIn = Paths.get(applicationFiles.getDirectoryInput());
-        Path pathOut = Paths.get(applicationFiles.getDirectoryOutput());
+        Path pathIn = Paths.get(handlerFile.getDirectoryIn());
+        Path pathOut = Paths.get(handlerFile.getDirectoryOut());
 
-        if (Files.notExists(pathIn)) {
-            LOGGER.warn("Input directory does not exist!");
-            return false;
-        } else if (Files.notExists(pathOut)) {
-            LOGGER.warn("Output directory does not exist!");
+        if (Files.notExists(pathIn) || Files.notExists(pathOut)) {
+            LOGGER.debug("Both in/out directories must exists!");
             return false;
         }
 
         return true;
     }
-}
 
+    public boolean createdDirectoriesSuccessfully() {
+        Path pathIn = Paths.get(handlerFile.getDirectoryIn());
+        Path pathOut = Paths.get(handlerFile.getDirectoryOut());
+
+        try {
+            if (Files.notExists(pathIn))
+                Files.createDirectory(pathIn);
+
+            if (Files.notExists(pathOut))
+                Files.createDirectory(pathOut);
+
+        } catch (IOException e) {
+            LOGGER.error("Error on create directory.", e);
+        }
+
+        return true;
+    }
+}

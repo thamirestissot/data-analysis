@@ -3,6 +3,7 @@ package com.thamirestissot.model;
 import java.util.List;
 
 public class Sale implements Comparable<Sale> {
+
     private final int code = 3;
     private int id;
     private List<SaleItem> items;
@@ -28,14 +29,20 @@ public class Sale implements Comparable<Sale> {
 
     @Override
     public int compareTo(Sale sale) {
-        double thisTotal = this.items.stream().mapToDouble(saleItem -> (saleItem.getQuantity() * saleItem.getItem().getPrice())).sum();
-        double otherTotal = sale.items.stream().mapToDouble(saleItem -> (saleItem.getQuantity() * saleItem.getItem().getPrice())).sum();
-        if (thisTotal > otherTotal) {
+        double thisTotal = this.items.stream()
+                .mapToDouble(saleItem -> (saleItem.getQuantity() * saleItem.getItem().getPrice()))
+                .sum();
+
+        double otherTotal = sale.items.stream()
+                .mapToDouble(saleItem -> (saleItem.getQuantity() * saleItem.getItem().getPrice()))
+                .sum();
+
+        if (thisTotal > otherTotal)
             return -1;
-        }
-        if (thisTotal < otherTotal) {
+
+        if (thisTotal < otherTotal)
             return 1;
-        }
+
         return 0;
     }
 }

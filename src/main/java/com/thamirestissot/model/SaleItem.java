@@ -1,6 +1,7 @@
 package com.thamirestissot.model;
 
 public class SaleItem {
+
     private Item item;
     private int quantity;
 

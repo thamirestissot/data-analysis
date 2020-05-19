@@ -1,8 +1,9 @@
 package com.thamirestissot.model;
 
 public class Customer {
+
     private final int code = 2;
-    String cnpj, name, businessArea;
+    private String cnpj, name, businessArea;
 
     public Customer(String cnpj, String name, String businessArea) {
         this.cnpj = cnpj;
